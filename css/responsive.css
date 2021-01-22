@@ -1,0 +1,255 @@
+﻿@media(max-width: 768px) {
+    
+    /* z-index　について */
+    /* 1. header */
+    /* 2. モーダルウィンドウ（body.modal::before） */
+    /* 3. モーダル時のナビゲーション（nav.sid） */
+    /* 4. ハンバーガーボタン（.btn-trigger） */
+
+    .title_humber {
+        display: block;
+        position: absolute;
+        top: 8px;
+        left: 20px;
+        font-size: 1.5rem;
+        height: 35px;
+        width:250px;
+        background-image: url(../img/mob_banner4.svg);
+        background-size: 100%;
+        background-repeat: no-repeat;
+    }
+
+    .btn-trigger {
+        position: fixed;
+        top:12px;
+        right: 20px;
+        line-height: 4rem;
+        width: 36px;
+        height: 28px;
+        cursor: pointer;
+        /*　モーダルウィンドウより上に置きたい　*/
+        z-index: 4;
+    }
+    
+    .btn-trigger span {
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background-color: rgb(179,144,61);
+      border-radius: 4px;
+    }
+    .btn-trigger, .btn-trigger span {
+      display: inline-block;
+      transition: all .5s;
+      box-sizing: border-box;
+    }
+    .btn-trigger span:nth-of-type(1) {
+      top: 0;
+    }
+    .btn-trigger span:nth-of-type(2) {
+      top: 12px;
+    }
+    .btn-trigger span:nth-of-type(3) {
+      bottom: 0;
+    }
+
+    /* ハンバーガー　animation */
+
+    #btn05.active span:nth-of-type(1) {
+      -webkit-transform: translateY(8px) rotate(-45deg);
+      transform: translateY(8px) rotate(-45deg);
+    }
+    #btn05.active span:nth-of-type(2) {
+      left: 50%;
+      opacity: 0;
+      -webkit-animation: active-btn05-bar02 .8s forwards;
+      animation: active-btn05-bar02 .8s forwards;
+    }
+    @-webkit-keyframes active-btn05-bar02 {
+      100% {
+        height: 0;
+      }
+    }
+    @keyframes active-btn05-bar02 {
+      100% {
+        height: 0;
+      }
+    }
+    
+    #btn05.active span:nth-of-type(3) {
+      -webkit-transform: translateY(-16px) rotate(45deg);
+      transform: translateY(-16px) rotate(45deg);
+    }
+
+    #container {
+    /* header分の高さ */
+        padding-top: 3rem;
+    /* base仮の高さ */
+/*        height: 540px;*/
+    }
+    /* headerここから */
+
+    /* headerの高さを短くする */
+    header {
+        width: 100vw;
+        height: 3rem;
+        position: fixed;
+        top: 0;
+        background-color: #f2f2f2;
+        z-index: 1;
+    }
+
+    header .inner {
+        display:none;
+    }
+    
+    /* PCサイズ用のnavは非表示 */
+    
+    nav.pc {
+        display: none;
+    }
+    
+    /* モーダルウィンドウ表示時 */
+
+    body.modal::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-color: rgba(179,144,61, .6);
+        z-index: 2;
+    }
+    
+    /* タブレット、スマホ用navを表示して、画面の右外に配置 */
+    nav.side {
+        display: block;
+        position: fixed;    
+        top: 0%;
+        right: 0%;
+        bottom: 0%;
+        width: 80%;    
+        background-color: #f2f2f2;
+        box-sizing: border-box;
+        border-left: 5px solid  rgb(179, 144, 61);
+        z-index: 3;
+        transform: translateX(100%);
+        transition: transform .5s;
+    }
+    
+        nav.side ul {
+            display: flex;
+            flex-direction: column;
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100px;
+            
+        }
+
+            nav.side ul li {
+                width: 100%;
+                /*    border: 5px black solid;*/
+                height: 50px;
+                box-sizing: border-box;
+                cursor: pointer;
+                
+                /*	float: left;*/
+            }
+
+                nav.side ul li:hover a:after {
+                    opacity: 1;
+                    transform: none;
+                }
+
+                nav.side ul li a {
+                    display: block;
+                    height: 50px;
+                    width: 70%;
+                    text-align: center;
+                    margin: 15px auto 0;
+                    line-height: 35px;
+                    text-decoration: none;
+                    color:  rgb(179, 144, 61);
+                    box-sizing: border-box;
+                }
+
+                nav.side ul li a:after {
+                    background-color: rgb(179, 144, 61);
+                    /* 線色 */
+                    border-radius: 1px;
+                    /* 線幅の半分 */
+                    content: "";
+                    display: block;
+                    height: 2px;
+                    /* 線幅 */
+                    /*    line-height: -50px;*/
+                    opacity: 0;
+                    transform: translateY(20px);
+                    transition: opacity .4s ease, transform .4s ease;
+                }
+    
+    nav.side #info_side #address {
+
+        text-align: left;
+        color: rgb(179,144,61); 
+        font-size: 13px;
+    }
+
+    nav.side #info_side #tel {
+         padding-top: 10px;
+        text-align: left;
+        color: rgb(179,144,61); 
+        font-size: 13px;
+    }
+    
+    #info_side {
+        position: absolute;
+        bottom: 20px;
+        left: 20px;
+    }
+    
+/*    info_side*/
+
+    /* 画面右外から画面右側に表示 */
+    body.modal nav.side {
+        transform: none;
+    }
+    
+    /* ハンバーガーボタンの色は白に変化 */
+    body.modal .btn-trigger span {
+        background-color: rgb(179, 144, 61);
+    }
+    
+    /* モーダルウィンドウここまで */
+    /* スクロールトップボタンここから */
+    #page-top {
+    position: fixed;
+    bottom: 50px;
+    right: 20px;
+    font-size: 80%;
+    }
+
+    #page-top a {
+        display: block;
+        background-color: rgb(179, 144, 61);
+        color: #fff;
+        width: 50px;
+/*        height: 0px;*/
+        line-height: 20px;
+        padding: 10px 0;
+        text-align: center;
+        text-decoration: none;
+        border-radius: 50%;
+        box-shadow: 1px;
+    }
+
+/* スクロールトップボタンここまで */
+}
+
+@media(max-width: 480px) {
+    
+}

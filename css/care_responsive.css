@@ -1,0 +1,200 @@
+@charset "utf-8";
+
+
+/* caer.html レスポンシブの設定　*/
+
+@media (max-width: 768px) {
+    
+    #care article h1 {
+       letter-spacing:0.4em;
+         }
+      
+}
+
+@media (max-width: 480px) {
+    
+    #care article h1{
+           letter-spacing:0.1em;  
+        }
+    
+        
+    /*写真と文章を縦に並べる*/
+
+     #care ul li{
+       display: block;
+/*      align-items: center;*/
+        }
+ 
+    #care ul li .photo,
+    #care ul li .txt {
+        width: 100%;
+        margin: 0 ;
+        padding:0px 30px 0px 30px;
+        align-content : stretch;
+    }
+    
+ 
+    #care ul li .photo img {
+        width: 90%;
+        margin: 0 ;
+        padding-top:30px; 
+        padding-bottom: 30px;
+      }
+    
+
+    #care ul li .slide_1 {
+        height: 450px;     
+        padding: 10px;
+         margin-bottom: -100px;
+       }
+
+     #care ul li .txt fadein_txt1{
+        height: 450px;
+        padding-bottom: 150px;
+        padding-top: -50px;
+        margin-top: -50px;
+         margin-bottom: 150px;
+        border-spacing:  inherit;
+         
+         
+        }
+    #care ul li .slide_2{
+        height: 450px;
+        padding-top:100px;
+         margin-bottom: -180px;
+        padding-bottom: 50px;
+        margin-top:50px;
+       }
+        
+    #care ul li .txt fadein_txt2{
+        height: 400px;
+        padding-bottom: 200px;
+        padding-top: -130px;
+        margin-top: -130px;
+        margin-bottom: 200px;
+        }
+    #care ul li .slide_3{
+        height: 450px;
+        padding: 10px;
+         margin-bottom: -150px;
+        margin-top: 80px;
+       }
+        
+    #care ul li .txt fadein_txt3{
+        height: 300px;
+        padding-bottom: 100px;
+        padding-top: -200px;
+        margin-top: -300px;
+        margin-bottom: 100px;
+       }
+    #care ul li .slide_4{
+        height: 400px;
+        padding: 10px;
+         margin-bottom: -150px;
+        margin-top: 50px;
+        }
+        
+    #care ul li .txt fadein_txt4{
+        height: 400px;
+        padding-bottom: 100px;
+        padding-top: -250px;
+        margin-top: -250px;
+        margin-bottom: 150px;
+        
+       }
+    #care ul li .slide_5{
+        height: 500px;
+        padding: 50px;
+         margin-bottom: -200px;
+       }
+        
+    #care ul li .txt fadein_txt5{
+        height: 400px;
+        padding-bottom: 100px;
+        padding-top: -30px;
+        margin-top: -300px;
+        margin-bottom: 80px;
+        
+       }
+    #care ul li .slide_6{
+        height: 450px;
+        padding: 10px;
+        margin-top:100px;
+        margin-bottom: -170px;
+       }
+        
+    #care ul li .txt fadein_txt6{
+        height: 300px;
+        padding-bottom: 0px;
+        padding-top: -180px;
+        margin-top: -180px;
+       }
+    
+    #container #care{
+       min-height: 100vh;
+        position: relative;
+        background-image: url(../img/dairisekimugen.jpg);
+        padding-bottom: 100px;
+        box-sizing: border-box;
+       }
+    
+    footer {
+        position: absolute;
+        bottom: 0;    
+    }
+    
+　　　/*写真文章縦並びここまで*/
+    
+    /*写真のアニメーションを消す指示*/
+
+    #care ul li .slide_1 .imgwrap:nth-child(1){
+      display: none;   
+    }
+/*
+    #care ul li .slide_2 .imgwrap:nth-child(1){
+      display: none;   
+    }
+*/
+/*
+ #care ul li .slide_3 .imgwrap:nth-child(1){
+      display: none;   
+    }
+*/
+/*
+    #care ul li .slide_4 .imgwrap:nth-child(1){
+      display: none;   
+    }
+    #care ul li .slide_5 .imgwrap:nth-child(2){
+      display: none;   
+    }
+    #care ul li .slide_6 .imgwrap:nth-child(1){
+      display: none;   
+    }
+*/
+/*
+    #care ul li .slide_1 .imgwrap:nth-child(1){
+        position: absolute;
+        width: 100%;
+        height: 400px;
+       
+*/
+
+    }  
+    @keyframes slideshow {
+      0%{
+        opacity: 1;
+        animation: none;
+        }
+
+      100%{
+        opacity: 1;
+         animation: none;
+        }
+        
+      }
+
+}
+
+
+/* care.html スマホ用レスポンシブ設定 ここまで */
+

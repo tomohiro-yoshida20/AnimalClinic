@@ -1,0 +1,74 @@
+@media(max-width: 768px) {
+   
+/*    ここから　facil.html*/
+    
+    /*    ヘッダー見出し間隔*/
+/*
+    #body_facil #container h1{
+        margin-top: 20px;
+    }
+*/
+    
+/*    ここまで　facil.html*/
+    
+}
+
+@media(max-width: 480px) {
+
+/*    ここから　facil.html*/
+       
+    #facility_info article{
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(8, auto);
+        grid-row-gap: 10px;
+        
+        padding: 0;
+        }
+            #facility_info #figwrapper1{
+                grid-row: 1;
+                grid-column: 1;
+                
+                width: 100%;
+                height: auto;
+            }
+                #figwrapper1>img{
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            #facility_info #figwrapper1+p{
+                grid-row: 2;
+                grid-column:1;
+            }
+            #facility_info #figwrapper2{
+                grid-row: 3;
+                grid-column: 1;
+            }
+            #facility_info #figwrapper2+p{
+                grid-row: 4;
+                grid-column: 1;
+            }
+            #facility_info #figwrapper3{
+                grid-row: 5;
+                grid-column: 1;
+            }
+            #facility_info #figwrapper3+p{
+                grid-row: 6;
+                grid-column: 1;
+            }
+            #facility_info #figwrapper4{
+                grid-row: 7;
+                grid-column: 1;
+            }
+            #facility_info #figwrapper4+p{
+                grid-row: 8;
+                grid-column: 1;
+                
+                /*フッター間隔調整*/
+                padding-bottom: 20px;
+            }    
+    
+/*    ここまで　facil.html*/
+
+}

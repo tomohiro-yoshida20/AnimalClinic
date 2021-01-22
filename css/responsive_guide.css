@@ -1,0 +1,71 @@
+@media(max-width: 768px) {
+    
+
+/* guide ここから  */
+
+    .box1_guide {
+        flex-direction: column;
+        /*        flex-wrap: nowrap;*/
+    }
+
+    .img1_guide {
+        width: 80%;
+        padding-top: 0;
+        position: static;
+        align-self: flex-end;
+    }
+
+    .img1_guide img {
+        width: 100%;
+        position: static;
+        transform: translateY(-100px);
+    }
+
+    .textG01_guide {
+        width: 100%;
+    }
+
+    .box2_guide {
+        flex-direction: column-reverse;
+        /*        flex-wrap: nowrap;*/
+        margin-top: 0;
+    }
+
+    .img2_guide {
+        width: 80%;
+        padding-top: 0px;
+        align-self: flex-end;
+    }
+
+    .img2_guide img {
+        width: 100%;
+        transform: translateY(-50px);
+
+    }
+
+    .textG02_guide {
+        width: 100%;
+        margin-top: 0;
+    }
+
+
+    .box3_guide {
+        margin-top: 0;
+    }
+
+    .textG03_guide {
+        flex-direction: column;
+        /*        flex-wrap: nowrap;*/
+        justify-content: center;
+    }
+
+    .textG03_guide > div {
+        width: 100%;
+    }
+/* guide ここまで  */
+    
+}
+
+@media(max-width: 480px) {
+    
+}
