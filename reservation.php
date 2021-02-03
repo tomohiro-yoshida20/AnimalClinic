@@ -1,12 +1,18 @@
 ﻿<?php
 
+    include('common/notice_remove.php');
     // 他ページから遷移してきたとき $_POST はない
-    session_start();
+
+
+session_start();
+//    $_SESSION['res_med'] = '';
 
     // functions.php の読み込み
-    include('account/functions.php');
+    include('common/functions.php');
+    ini_set("display_errors","Off");
     
     // DB接続
+    //require_once 'inc/inc_path.php';
     require('db/db_connect.php');
     
     // 画面遷移用のflag
@@ -18,6 +24,8 @@
     
     // ログインボタン押下時の処理
     if (isset($_POST['login'])) {
+            
+
         
         // 打ち込んだ入力項目↓電話番号(prymary にしてもいいかも)とパスワード
         // tel は数値 int は最大数ではじかれるためつけない
@@ -32,11 +40,11 @@
         }
 
         // 入力項目から特定のアカウントを検索 => $result_user 
-        include('login.php');
+        include('account/login.php');
 
-        echo "<pre>";
-        echo "ユーザーID：" . $result_user['password'];
-        echo "</pre>";
+//        echo "<pre>";
+//        echo "ユーザーID：" . $result_user['password'];
+//        echo "</pre>";
 
         // result_user が 空でない なら予約確認画面へ
         if (!empty($result_user)) {
@@ -47,16 +55,28 @@
         }
 
         // ユーザーIDを用いて予約情報を検索する => $reservation
-        include('res_search.php');
+        include('account/res_search.php');
 
         // $reservation から予約確認画面 の項目を出力する
-        include('res_confirmation.php');
+        include('account/res_confirmation.php');
         // $res_med, $check_in, $check_out
-
     
     }
 
-    
+
+
+
+    // セッションの予約情報がある場合は変数に格納して使う
+    $res_med = $_SESSION['res_med'];
+    $res_hotel = $_SESSION['res_hotel'];
+    $check_in = $_SESSION['check_in'];
+    $check_out = $_SESSION['check_out'];
+//    echo "ホテルのres_kbn は" . $_SESSION['res_hotel']['saishin_kbn'];
+
+
+
+
+
     // セッションに会員情報が存在する場合は常に会員のご予約情報へとぶ
     if (!empty($_SESSION['user']['tel']) && !empty($_SESSION['user']['password'])) {
         $flag = 1;
@@ -66,7 +86,25 @@
     if (isset($_POST['logout'])) {
 
         // ログインセッションを削除してログイン画面へ
-        unset($_SESSION);
+        $_SESSION = array();
+       setcookie(session_name(),'', time()-1800);
+       session_destroy(); 
+//        unset($_SESSION);
+//        session_destroy();
+// セッションクッキーの削除
+//setcookie( session_name(), '', time()-60);
+ 
+// セッションを破棄
+//        $flg = session_destroy();
+// 
+//if( $flg === true ){
+//  echo "セッションを破棄しました！";
+//} else {
+//  echo "セッションの破棄に失敗しました！";
+//    }
+
+        
+        
 
         $flag = 0;
 
@@ -87,21 +125,6 @@
 
         // 新規登録画面（種別選択）
         $flag = 2;
-    }
-        
-    // 予約変更
-    // 予約状況 => 予約変更
-    if (isset($_POST['change']) ) {
-
-        $flag = 6;
-        
-    }
-    // 予約キャンセル
-    // 予約状況 => 予約キャンセル
-    if (isset($_POST['cancel']) ) {
-
-        $flag = 7;
-        
     }
     
     // 次へ 種別選択 => 登録詳細選択へ
@@ -159,30 +182,38 @@
         $flag = 5;
 
         // 予約を reservations テーブルに登録
-        include('res_insert.php');
+        include('account/res_insert.php');
         
     }
+//
+//    echo "<pre>";
+//    echo "↓セッションの電話番号" . PHP_EOL;
+//    var_dump($_SESSION['user']['tel']);
+//    echo "↓セッションのパスワード" . PHP_EOL;
+//    var_dump($_SESSION['user']['password']);
+//    echo "↓セッションのアカウント名" . PHP_EOL;
+//    var_dump($_SESSION['user']['name']);
+//    echo "<hr>";
+//    echo "</pre>";
+//    
+//    echo "↓セッションのmed予約状況" . PHP_EOL;
+//    var_dump($_SESSION['res_med']);
+//    echo "<hr>";
+//    echo "↓セッションのhotel予約状況" . PHP_EOL;
+//    var_dump($res_hotel);
+//    echo "<pre>"; 
+//   echo "↓セッションのcheck_in" . PHP_EOL;
+//   var_dump($_SESSION['check_in']);
+//   echo "↓セッションのcheck_out" . PHP_EOL;
+//   var_dump($_SESSION['check_out']);
+//   echo "</pre>";
+//    echo "<hr>";
+//        
+//    echo "↓セッションのuser" . PHP_EOL;
+//    var_dump($_SESSION['user']);
 
-    echo "<pre>";
-    echo "↓セッションの電話番号" . PHP_EOL;
-    var_dump($_SESSION['user']['tel']);
-    echo "↓セッションのパスワード" . PHP_EOL;
-    var_dump($_SESSION['user']['password']);
-    echo "↓セッションのアカウント名" . PHP_EOL;
-    var_dump($_SESSION['user']['name']);
-    echo "↓セッションの診察状況" . PHP_EOL;
-    var_dump($_SESSION['res_med']);
-    echo "↓セッションのcheck_in" . PHP_EOL;
-    var_dump($_SESSION['check_in']);
-    echo "↓セッションのcheck_out" . PHP_EOL;
-    var_dump($_SESSION['check_out']);
-    echo "</pre>";
 
 
-    // セッションの予約情報がある場合は変数に格納して使う
-    $res_med = $_SESSION['res_med'];
-    $check_in = $_SESSION['check_in'];
-    $check_out = $_SESSION['check_out'];
 
 ?>
 
@@ -214,6 +245,13 @@
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/responsive.css">
     <link rel="stylesheet" href="css/reservation.css">
+    <style>
+        h2 {
+            font-weight: bold;
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+        }
+    </style>
 </head>
 
 
@@ -240,7 +278,7 @@
             </div>
         </div>
         <div>
-            <a href="index.html" class="title_humber"></a>
+            <a href="index.php" class="title_humber"></a>
         </div>
     </header>
     <div class="btn-trigger clearfix" id="btn05">
@@ -284,7 +322,7 @@
 
         <!-- ログイン画面 -->
         <?php if($flag == 0): ?>
-            <h2>会員ログイン</h2>
+            <h2>●会員ログイン</h2><br>
             <form action="" method="post">
                 <div class="form-group">
                     <label for="tel">電話番号</label>
@@ -304,7 +342,7 @@
 
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary bgc-main" name="login">ログイン</button>
-                    <a href="./account/register.php">
+                    <a href="register.php">
                         <button class="btn btn-primary bgc-main" type="button">会員登録</button>
                     </a>
                 </div>
@@ -313,11 +351,11 @@
 
         <!-- 予約状況画面 -->
         <?php if($flag == 1): ?>
-            <h2>ご予約状況</h2>
+            <h2>●ご予約状況</h2>
             <form action="" method="post">
                 <!-- 予約情報が存在する場合 -->
                 <?php if( (!empty($res_med) && $res_med['year'] != 0) || ( ($check_in['year'] != 0) && ($check_out['year'] != 0)) ): ?>
-                    <p><?php echo $_SESSION['name'] ?> 様</p>
+                    <p><?php echo $_SESSION['user']['name']; ?> 様</p>
 
                     <!-- 診察予約が存在する -->
                     <?php if(!empty($res_med) && $res_med['year'] != 0): ?>
@@ -336,17 +374,15 @@
                     <?php endif; ?>
                     <!-- 必ず表示 -->
                     <p>当日お気をつけてご来院ください。</p>
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary bgc-main" name="change">ご予約変更</button>
-                        <button type="submit" class="btn btn-primary bgc-main" name="cancel">ご予約キャンセル</button>
+                    <div class="form-group" style="margin-top: 10px;">
                         <button type="submit" class="btn btn-primary bgc-main" name="new_reserve">新規ご予約</button>
                         <button type="submit" class="btn btn-primary bgc-main" name="logout">ログアウト</button>
                     </div>
                 <!-- 予約情報が存在しな場合 -->
                 <?php else: ?>
-                    <p><?php echo $_SESSION['name'] ?> 様</p>
+                    <p><?php echo $_SESSION['user']['name']; ?> 様</p>
                     <p>次回ご予約はいただいておりません。</p>
-                    <div class="form-group">
+                    <div class="form-group" style="margin-top: 10px;">
                         <button type="submit" class="btn btn-primary bgc-main" name="new_reserve">新規ご予約</button>
                         <button type="submit" class="btn btn-primary bgc-main" name="logout">ログアウト</button>
                     </div>
@@ -356,7 +392,7 @@
 
         <!-- 新規登録 種別選択 画面 -->
         <?php if($flag == 2): ?>
-            <h2>新規ご予約</h2>
+            <h2>●新規ご予約</h2>
             <form action="" method="post">
                 <div class="form-group">
                     <div class="text-left column">予約種別</div>
@@ -376,7 +412,7 @@
 
         <!-- 新規登録 予約詳細 画面 -->
         <?php if($flag == 3): ?>
-            <h2>新規ご予約詳細</h2>
+            <h2>●新規ご予約詳細</h2>
             <!-- バリデーション -->
             <?php if (!empty($error_list)):?>
                 <p style="color: red">下記のエラーがあります。修正してください。</p>
@@ -411,7 +447,6 @@
                     <div class="form-group">
                         <label for="res_time">ご予約時刻</label>
                         <select name="res_time" id="res_time">
-                            <option value=""      <?php if (empty($_POST['res_time'])) { echo 'selected'; } ?>>-</option>
                             <option value="0930"   <?php if ($_POST['res_time'] == 930) { echo 'selected'; } ?>>9:30</option>
                             <option value="1030"  <?php if ($_POST['res_time'] == 1030) { echo 'selected'; } ?>>10:30</option>
                             <option value="1130"  <?php if ($_POST['res_time'] == 1130) { echo 'selected'; } ?>>11:30</option>
@@ -431,7 +466,6 @@
                     <div class="form-group">
                     <label for="in_time">チェックイン時刻</label>
                         <select name="in_time" id="in_time">
-                            <option value=""      <?php if (empty($_POST['in_time'])) { echo 'selected'; } ?>>-</option>
                             <option value="0930"  <?php if ($_POST['in_time'] == 930) { echo 'selected'; } ?>>9:30</option>
                             <option value="1030"  <?php if ($_POST['in_time'] == 1030) { echo 'selected'; } ?>>10:30</option>
                             <option value="1130"  <?php if ($_POST['in_time'] == 1130) { echo 'selected'; } ?>>11:30</option>
@@ -449,7 +483,6 @@
                     <div class="form-group">
                         <label for="out_time">チェックアウト時刻</label>
                         <select name="out_time" id="out_time">
-                            <option value=""      <?php if (empty($_POST['out_time'])) { echo 'selected'; } ?>>-</option>
                             <option value="0930"  <?php if ($_POST['out_time'] == 2001) { echo 'selected'; } ?>>9:30</option>
                             <option value="1030"  <?php if ($_POST['out_time'] == 2002) { echo 'selected'; } ?>>10:30</option>
                             <option value="1130"  <?php if ($_POST['out_time'] == 2003) { echo 'selected'; } ?>>11:30</option>
@@ -468,7 +501,7 @@
                         <textarea class="form-control" name="biko" id="biko" rows="5"><?php echo $_POST['biko']; ?></textarea>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group" style="margin-top: 10px;">
                     <button type="submit" class="btn btn-primary bgc-main" name="new_res_confirm">確認</button>
                     <button type="submit" class="btn btn-primary bgc-main" name="new_res_return_kbn">戻る</button>
                 </div>
@@ -480,13 +513,12 @@
 
         <!-- 予約内容確認画面 -->
         <?php if($flag == 4): ?>
-            <h2>ご予約内容確認</h2>
+            <h2>●ご予約内容確認</h2>
 
-            ★確認画面★
-            <br>
+            
 
 
-            <?php if($_POST['res_kbn'] == 0) { echo '●診察'; } else { echo '●ペットホテル'; }?>
+            <?php if($_POST['res_kbn'] == 0) { echo '■ 診察'; } else { echo '■ ペットホテル'; }?>
             <br>
             動物種別：<?php if($_POST['animal_kbn'] == 0) { echo '犬'; } elseif($_POST['animal_kbn'] == 1) { echo '猫'; } else {echo 'その他';}  ?>
             <br>
@@ -511,7 +543,7 @@
 
             <form action="" method="post">
               
-                <div class="form-group">
+                <div class="form-group" style="margin-top: 10px;">
                     <button type="submit" class="btn btn-primary bgc-main" name="new_res_submit">送信</button>
                     <button type="submit" class="btn btn-primary bgc-main" name="new_res_return_kaku">戻る</button>
                 </div>
@@ -531,11 +563,11 @@
 
         <!-- 予約内容確認画面 -->
         <?php if($flag == 5): ?>
-            <h2>ご予約内容確認</h2>
+            <h2>●ご予約内容確認</h2>
 
             ★ご予約完了
             <form action="" method="post">
-                <div class="form-group">
+                <div class="form-group" style="margin-top: 10px;">
                     <button type="submit" class="btn btn-primary bgc-main" name="login">予約内容確認画面へ</button>
                 </div>
             </form>

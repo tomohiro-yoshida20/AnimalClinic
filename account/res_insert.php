@@ -31,15 +31,43 @@
   )";
 
   // 各種データ設定
-  // $id          = $user_id['id'];
   $id          = (int)$_SESSION['user']['id'];
-  // $id          = 5;
 
+  // 診察かペットホテルかはpostで前のページから引っ張ってくる
   $res_kbn     = (int)$_POST['res_kbn'];
-  // 最新を更新する場合
-  // $saishin_kbn = (int)$_POST['saishin_kbn'];
-  // 初めての場合 $saishin_kbn = 0
-  $saishin_kbn = 0;
+
+  // 初めての場合 $saishin_kbn = 0;
+  // 2回目以降はセッションから情報をとってきて　+　１　する
+//  echo "res_kbn 診察 は" . $_SESSION['res_med']['saishin_kbn'];
+//  echo "res_kbn ホテル は" . $_SESSION['res_hotel']['saishin_kbn'];
+//  echo "user_id は" . $id;
+  if($res_kbn == 0) {
+    // 診察
+    if ($_SESSION['res_med']['saishin_kbn'] == null) {
+      $saishin_kbn = 0;
+    } else {  
+      $saishin_kbn = $_SESSION['res_med']['saishin_kbn'] + 1;
+    }
+    
+  } else {
+    // ペットホテルホテル
+    if ($_SESSION['res_hotel']['saishin_kbn'] == null) {
+      $saishin_kbn = 0;
+    } else {  
+      $saishin_kbn = $_SESSION['res_hotel']['saishin_kbn'] + 1;
+    }
+
+  }
+//  echo "saishin_kbn は" . $saishin_kbn;
+//　$saishin_kbn = $_SESSION['res_med']['saishin_kbn'];
+  // 初めてではない最新の場合
+//  echo '最新区分は⇒';
+//  var_dump($saishin_kbn);
+//  echo 'idは⇒';
+//  var_dump($id);
+//  var_dump($_SESSION['res_med']);
+//  var_dump('1');
+
   $animal_kbn  = (int)$_POST['animal_kbn'];
 
   // 診察の場合
@@ -79,21 +107,22 @@
   $stmt->bindValue(':new_day'     , $new_day,     PDO::PARAM_INT);
   $stmt->bindValue(':new_time'    , $new_time,    PDO::PARAM_INT);
   // 予約登録処理実行
-  $stmt->execute();
+   $stmt->execute();
 
-  echo "<pre>";
-
-  var_dump($id);
-  var_dump($res_kbn);
-  var_dump($saishin_kbn);
-  var_dump($animal_kbn);
-  var_dump($from_day);
-  var_dump($to_day);
-  var_dump($from_time);
-  var_dump($to_time);
-  var_dump($biko);
-  var_dump($update_day);
-  var_dump($update_time);
-  var_dump($new_day);
-  var_dump($new_time);
-  echo "</pre>";
+//  echo "<pre>";
+//  echo "インサート情報";
+//  var_dump($id);
+//  var_dump($res_kbn);
+//  echo "最新区分 =>";
+//  var_dump($saishin_kbn);
+//  var_dump($animal_kbn);
+//  var_dump($from_day);
+//  var_dump($to_day);
+//  var_dump($from_time);
+//  var_dump($to_time);
+//  var_dump($biko);
+//  var_dump($update_day);
+//  var_dump($update_time);
+//  var_dump($new_day);
+//  var_dump($new_time);
+//  echo "</pre>";

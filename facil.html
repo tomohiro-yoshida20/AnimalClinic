@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ja">
 
 <head>
@@ -7,15 +7,12 @@
 
     <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.18.1/build/cssreset/cssreset-min.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive_facil.css">
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/responsive.css">
-    <link rel="stylesheet" href="css/access.css">
-    
     <!-- fontawesome    -->
     <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <!-- Bootstrap CSS -->
-    <!--        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">-->
     <!-- googleMaterials -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <!-- googlefonts -->
@@ -24,7 +21,7 @@
 </head>
 
 
-<body id="body_access">
+<body id="body_facil">
     <header>
         <div class="inner">
             <div id="logo">
@@ -86,14 +83,37 @@
     </nav>
     
     <div id="container">
-        <div id="container_access">
-            <h1>アクセス</h1>
-            <p>〒810-0001 福岡県福岡市中央区天神３丁目４−８</p>
-              <div class="GoogleMap">
-               <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3323.5216485570995!2d130.3937556152029!3d33.59176718073373!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3541918f29fb1acb%3A0x3031860bc933638d!2z44CSODEwLTAwMDEg56aP5bKh55yM56aP5bKh5biC5Lit5aSu5Yy65aSp56We77yT5LiB55uu77yU4oiS77yYIOWkqeelnumHjeadvuODk-ODqw!5e0!3m2!1sja!2sjp!4v1607667426506!5m2!1sja!2sjp" width="100%" height="500px" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+        <section id="facility_info">
+                <h1>施設案内</h1>
+                <p>当院では、最新の設備を導入し、高度な治療を受けることができます。<br>
+                また、大切なご家族はもちろん、来院されたすべてのお客様が快適に時間を過ごすことができるよう、充実した設備をご用意しております。
+                </p>
+                <article>
+                    <div class="figwrapper" id="figwrapper1">
+                          <img  class="fig1" id='fadein_first_fig' src="img/%E5%86%99%E7%9C%9F_%E3%83%AD%E3%83%93%E3%83%BC2.jpg" alt="ロビー写真">
+                    </div>
+                    <p id='fadein_first_p'><span>ロビー</span><br><br>広いロビーでゆっくりと<br>ご家族の帰りをお待ちいただけます。
+                    </p>
                   
-              </div>
-        </div>        
+                   <div class="figwrapper" id="figwrapper2">
+                       <img class="fig2" src="img/medical.jpg" alt="スタッフ">
+                   </div>
+                   <p class="fadein_txt2"><span>スタッフ</span><br><br>当院には経験豊富なスタッフが多数在籍しております。<br>ご希望がありましたらお気軽にお申し付けください。</p>
+                
+               
+                   <div class="figwrapper" id="figwrapper3">
+                       <img class="fig3" src="img/%E3%83%8F%E3%82%A4%E3%83%86%E3%82%AF%E6%A9%9F%E5%99%A8pixabayR.jpg" alt="MRI">
+                   </div>
+                   <p class="fadein_txt3"><span>最新鋭の機器</span><br><br>最新鋭の機器を揃えているため、<br>幅広い症状に対して治療を行うことができます。</p>
+               
+                   <div class="figwrapper" id="figwrapper4">
+                       <img class="fig4" src="img/heli.jpg" alt="ドクターヘリ">
+                   </div>
+                    <p class="fadein_txt6"><span>ドクターヘリ</span><br><br>ドクターヘリを導入しております。<br>
+                    突然の体調の変化にも対応可能です。</p>
+                
+                </article>        
+            </section>
     </div>
     
     <footer>
@@ -114,7 +134,7 @@
 
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="js/main.js"></script>
-
+    <script src="js/facil-fade.js"></script>
 
 </body>
 </html>

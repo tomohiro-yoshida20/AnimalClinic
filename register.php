@@ -1,12 +1,15 @@
 ﻿<?php
+    ini_set('display_errors',1);
+    include('common/notice_remove.php');
 
     // reservation.php から遷移してきたとき $_POST はない
 
     // functions.php の読み込み
-    include('functions.php');
+    include('common/functions.php');
 
     // DB接続
-    require('../db/db_connect.php');
+    require_once 'inc/inc_path.php';
+    require('db/db_connect.php');
 
     // 画面遷移用のflag
     // 0：登録フォーム
@@ -18,7 +21,7 @@
     if (isset($_POST['confirm'])) {
 
         // バリデーションを行う
-        require('validation.php');
+        require('common/validation.php');
 
         // error_list が 空 なら確認画面へ
         if (empty($error_list)) {
@@ -104,10 +107,10 @@
         $stmt->bindValue(':new_time'    , $new_time,    PDO::PARAM_INT);
 
         //処理実行
-        $stmt->execute();
+       $stmt->execute();
     }
 
-    var_dump($error_list);
+//    var_dump($error_list);
 ?>
 
 <!DOCTYPE html>
@@ -125,10 +128,10 @@
     <!-- googlefonts -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200;300;400;500;600;700;900&display=swap" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="img/logo.png">
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/base.css">
-    <link rel="stylesheet" href="../css/responsive.css">
-    <link rel="stylesheet" href="../css/reservation.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/reservation.css">
 </head>
 
 <body id="body_res">
@@ -154,7 +157,7 @@
             </div>
         </div>
         <div>
-            <a href="index.html" class="title_humber"></a>
+            <a href="index.php" class="title_humber"></a>
         </div>
     </header>
     <div class="btn-trigger clearfix" id="btn05">
@@ -167,7 +170,7 @@
             <li id="nav_guide"><a href="guide.html">診療案内</a></li>
             <li id="nav_facil"><a href="facil.html">施設案内</a></li>
             <li id="nav_care"><a href="care.html">スペシャルケア</a></li>
-            <li id="nav_res"><a href="reservation.html">ご予約</a></li>
+            <li id="nav_res"><a href="reservation.php">ご予約</a></li>
             <li id="nav_access"><a href="access.html">アクセス</a></li>
         </ul>
     </nav>
@@ -176,7 +179,7 @@
             <li id="nav_guide_side"><a href="guide.html">診療案内</a></li>
             <li id="nav_facil_side"><a href="facil.html">院内設備</a></li>
             <li id="nav_care_side"><a href="care.html">スペシャルケア</a></li>
-            <li id="nav_res_side"><a href="reservation.html">ご予約</a></li>
+            <li id="nav_res_side"><a href="reservation.php">ご予約</a></li>
             <li id="nav_access_side"><a href="access.html">アクセス</a></li>
         </ul>
         <div id="info_side">
@@ -197,7 +200,7 @@
 
         <!-- 確認画面 -->
         <?php if($flag == 1): ?>
-            ★確認画面★
+            ★確認★<br>
             <br>
             名前：<?php echo h($_POST['name']); ?>
             <br>
@@ -238,11 +241,11 @@
 
         <!-- 完了画面 -->
         <?php if($flag == 2): ?>
-            ★完了画面★
+            ★完了★<br>
             <br>
             会員登録が完了しました。
             <div class="form-group">
-                <a href="../reservation.php">
+                <a href="reservation.php">
                     <button class="btn btn-primary bgc-main" type="button">ログイン画面へ</button>
                 </a>
             </div>
@@ -250,7 +253,6 @@
         
         <!-- 入力フォーム -->
         <?php if($flag == 0): ?>
-            ★入力フォーム★
             <br>
             <!-- バリデーション -->
             <?php if (!empty($error_list)):?>
@@ -272,6 +274,87 @@
                     <label for="">生年月日</label>
                     <select name="year" required>
                         <option value=""   <?php if (empty($_POST['year'])) { echo 'selected'; } ?>>-</option>
+                        <option value="1920"  <?php if ($_POST['year'] == 1920) { echo 'selected'; } ?>>1920</option>
+                        <option value="1921"  <?php if ($_POST['year'] == 1921) { echo 'selected'; } ?>>1921</option>
+                        <option value="1922"  <?php if ($_POST['year'] == 1922) { echo 'selected'; } ?>>1922</option>
+                        <option value="1923"  <?php if ($_POST['year'] == 1923) { echo 'selected'; } ?>>1923</option>
+                        <option value="1924"  <?php if ($_POST['year'] == 1924) { echo 'selected'; } ?>>1924</option>
+                        <option value="1925"  <?php if ($_POST['year'] == 1925) { echo 'selected'; } ?>>1925</option>
+                        <option value="1926"  <?php if ($_POST['year'] == 1926) { echo 'selected'; } ?>>1926</option>
+                        <option value="1927"  <?php if ($_POST['year'] == 1927) { echo 'selected'; } ?>>1927</option>
+                        <option value="1928"  <?php if ($_POST['year'] == 1928) { echo 'selected'; } ?>>1928</option>
+                        <option value="1929"  <?php if ($_POST['year'] == 1929) { echo 'selected'; } ?>>1929</option>
+                        <option value="1930"  <?php if ($_POST['year'] == 1930) { echo 'selected'; } ?>>1930</option>
+                        <option value="1931"  <?php if ($_POST['year'] == 1931) { echo 'selected'; } ?>>1931</option>
+                        <option value="1932"  <?php if ($_POST['year'] == 1932) { echo 'selected'; } ?>>1932</option>
+                        <option value="1933"  <?php if ($_POST['year'] == 1933) { echo 'selected'; } ?>>1933</option>
+                        <option value="1934"  <?php if ($_POST['year'] == 1934) { echo 'selected'; } ?>>1934</option>
+                        <option value="1935"  <?php if ($_POST['year'] == 1935) { echo 'selected'; } ?>>1935</option>
+                        <option value="1936"  <?php if ($_POST['year'] == 1936) { echo 'selected'; } ?>>1936</option>
+                        <option value="1937"  <?php if ($_POST['year'] == 1937) { echo 'selected'; } ?>>1937</option>
+                        <option value="1938"  <?php if ($_POST['year'] == 1938) { echo 'selected'; } ?>>1938</option>
+                        <option value="1939"  <?php if ($_POST['year'] == 1939) { echo 'selected'; } ?>>1939</option>
+                        <option value="1940"  <?php if ($_POST['year'] == 1940) { echo 'selected'; } ?>>1940</option>
+                        <option value="1941"  <?php if ($_POST['year'] == 1941) { echo 'selected'; } ?>>1941</option>
+                        <option value="1942"  <?php if ($_POST['year'] == 1942) { echo 'selected'; } ?>>1942</option>
+                        <option value="1943"  <?php if ($_POST['year'] == 1943) { echo 'selected'; } ?>>1943</option>
+                        <option value="1944"  <?php if ($_POST['year'] == 1944) { echo 'selected'; } ?>>1944</option>
+                        <option value="1945"  <?php if ($_POST['year'] == 1945) { echo 'selected'; } ?>>1945</option>
+                        <option value="1946"  <?php if ($_POST['year'] == 1946) { echo 'selected'; } ?>>1946</option>
+                        <option value="1947"  <?php if ($_POST['year'] == 1947) { echo 'selected'; } ?>>1947</option>
+                        <option value="1948"  <?php if ($_POST['year'] == 1948) { echo 'selected'; } ?>>1948</option>
+                        <option value="1949"  <?php if ($_POST['year'] == 1949) { echo 'selected'; } ?>>1949</option>
+                        <option value="1950"  <?php if ($_POST['year'] == 1950) { echo 'selected'; } ?>>1950</option>
+                        <option value="1951"  <?php if ($_POST['year'] == 1951) { echo 'selected'; } ?>>1951</option>
+                        <option value="1952"  <?php if ($_POST['year'] == 1952) { echo 'selected'; } ?>>1952</option>
+                        <option value="1953"  <?php if ($_POST['year'] == 1953) { echo 'selected'; } ?>>1953</option>
+                        <option value="1954"  <?php if ($_POST['year'] == 1954) { echo 'selected'; } ?>>1954</option>
+                        <option value="1955"  <?php if ($_POST['year'] == 1955) { echo 'selected'; } ?>>1955</option>
+                        <option value="1956"  <?php if ($_POST['year'] == 1956) { echo 'selected'; } ?>>1956</option>
+                        <option value="1957"  <?php if ($_POST['year'] == 1957) { echo 'selected'; } ?>>1957</option>
+                        <option value="1958"  <?php if ($_POST['year'] == 1958) { echo 'selected'; } ?>>1958</option>
+                        <option value="1959"  <?php if ($_POST['year'] == 1959) { echo 'selected'; } ?>>1959</option>
+                        <option value="1960"  <?php if ($_POST['year'] == 1960) { echo 'selected'; } ?>>1960</option>
+                        <option value="1961"  <?php if ($_POST['year'] == 1961) { echo 'selected'; } ?>>1961</option>
+                        <option value="1962"  <?php if ($_POST['year'] == 1962) { echo 'selected'; } ?>>1962</option>
+                        <option value="1963"  <?php if ($_POST['year'] == 1963) { echo 'selected'; } ?>>1963</option>
+                        <option value="1964"  <?php if ($_POST['year'] == 1964) { echo 'selected'; } ?>>1964</option>
+                        <option value="1965"  <?php if ($_POST['year'] == 1965) { echo 'selected'; } ?>>1965</option>
+                        <option value="1966"  <?php if ($_POST['year'] == 1966) { echo 'selected'; } ?>>1966</option>
+                        <option value="1967"  <?php if ($_POST['year'] == 1967) { echo 'selected'; } ?>>1967</option>
+                        <option value="1968"  <?php if ($_POST['year'] == 1968) { echo 'selected'; } ?>>1968</option>
+                        <option value="1969"  <?php if ($_POST['year'] == 1969) { echo 'selected'; } ?>>1969</option>
+                        <option value="1970"  <?php if ($_POST['year'] == 1970) { echo 'selected'; } ?>>1970</option>
+                        <option value="1971"  <?php if ($_POST['year'] == 1971) { echo 'selected'; } ?>>1971</option>
+                        <option value="1972"  <?php if ($_POST['year'] == 1972) { echo 'selected'; } ?>>1972</option>
+                        <option value="1973"  <?php if ($_POST['year'] == 1973) { echo 'selected'; } ?>>1973</option>
+                        <option value="1974"  <?php if ($_POST['year'] == 1974) { echo 'selected'; } ?>>1974</option>
+                        <option value="1975"  <?php if ($_POST['year'] == 1975) { echo 'selected'; } ?>>1975</option>
+                        <option value="1976"  <?php if ($_POST['year'] == 1976) { echo 'selected'; } ?>>1976</option>
+                        <option value="1977"  <?php if ($_POST['year'] == 1977) { echo 'selected'; } ?>>1977</option>
+                        <option value="1978"  <?php if ($_POST['year'] == 1978) { echo 'selected'; } ?>>1978</option>
+                        <option value="1979"  <?php if ($_POST['year'] == 1979) { echo 'selected'; } ?>>1979</option>
+                        <option value="1980"  <?php if ($_POST['year'] == 1980) { echo 'selected'; } ?>>1980</option>
+                        <option value="1981"  <?php if ($_POST['year'] == 1981) { echo 'selected'; } ?>>1981</option>
+                        <option value="1982"  <?php if ($_POST['year'] == 1982) { echo 'selected'; } ?>>1982</option>
+                        <option value="1983"  <?php if ($_POST['year'] == 1983) { echo 'selected'; } ?>>1983</option>
+                        <option value="1984"  <?php if ($_POST['year'] == 1984) { echo 'selected'; } ?>>1984</option>
+                        <option value="1985"  <?php if ($_POST['year'] == 1985) { echo 'selected'; } ?>>1985</option>
+                        <option value="1986"  <?php if ($_POST['year'] == 1986) { echo 'selected'; } ?>>1986</option>
+                        <option value="1987"  <?php if ($_POST['year'] == 1987) { echo 'selected'; } ?>>1987</option>
+                        <option value="1988"  <?php if ($_POST['year'] == 1988) { echo 'selected'; } ?>>1988</option>
+                        <option value="1989"  <?php if ($_POST['year'] == 1989) { echo 'selected'; } ?>>1989</option>
+                        <option value="1990"  <?php if ($_POST['year'] == 1990) { echo 'selected'; } ?>>1990</option>
+                        <option value="1991"  <?php if ($_POST['year'] == 1991) { echo 'selected'; } ?>>1991</option>
+                        <option value="1992"  <?php if ($_POST['year'] == 1992) { echo 'selected'; } ?>>1992</option>
+                        <option value="1993"  <?php if ($_POST['year'] == 1993) { echo 'selected'; } ?>>1993</option>
+                        <option value="1994"  <?php if ($_POST['year'] == 1994) { echo 'selected'; } ?>>1994</option>
+                        <option value="1995"  <?php if ($_POST['year'] == 1995) { echo 'selected'; } ?>>1995</option>
+                        <option value="1996"  <?php if ($_POST['year'] == 1996) { echo 'selected'; } ?>>1996</option>
+                        <option value="1997"  <?php if ($_POST['year'] == 1997) { echo 'selected'; } ?>>1997</option>
+                        <option value="1998"  <?php if ($_POST['year'] == 1998) { echo 'selected'; } ?>>1998</option>
+                        <option value="1999"  <?php if ($_POST['year'] == 1999) { echo 'selected'; } ?>>1999</option>
+                        <option value="2000"  <?php if ($_POST['year'] == 2000) { echo 'selected'; } ?>>2000</option>
                         <option value="2001"  <?php if ($_POST['year'] == 2001) { echo 'selected'; } ?>>2001</option>
                         <option value="2002"  <?php if ($_POST['year'] == 2002) { echo 'selected'; } ?>>2002</option>
                         <option value="2003"  <?php if ($_POST['year'] == 2003) { echo 'selected'; } ?>>2003</option>
@@ -360,7 +443,7 @@
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary bgc-main" name="confirm">確認する</button>
-                    <a href="../reservation.php">
+                    <a href="reservation.php">
                         <button class="btn btn-primary bgc-main" type="button">キャンセル</button>
                     </a>
                 </div>
@@ -378,8 +461,8 @@
 
     <footer>
         <ul id="f-sns" class="clearfix">
-            <li><img src="../img/sns/twitter.svg" alt="" style="width:40px;height:40px;"></li>
-            <li><img src="../img/sns/facebook.png" alt="" style="width:40px;height:40px;"></li>
+            <li><img src="img/sns/twitter.svg" alt="" style="width:40px;height:40px;"></li>
+            <li><img src="img/sns/facebook.png" alt="" style="width:40px;height:40px;"></li>
         </ul>
         <div class="copyright">
             <p><small>Copyright 2021 ヒューリスアニマルクリニック All rights reserved.</small></p>
@@ -392,8 +475,8 @@
         </a>
     </p>
 
-    <script src="../js/jquery-3.3.1.min.js"></script>
-    <script src="../js/main.js"></script>
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/main.js"></script>
 
 
 </body>

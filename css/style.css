@@ -895,3 +895,15 @@ li .txt{
 }
 
 /* index.cssここまで */
+
+/*追加css*/
+#breadcrumb {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 20px 20px 0px;
+}
+
+#breadcrumb ul li {
+	display: inline;
+	margin-right: 5px;
+}
