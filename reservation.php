@@ -3,16 +3,13 @@
     include('common/notice_remove.php');
     // 他ページから遷移してきたとき $_POST はない
 
-
-session_start();
-//    $_SESSION['res_med'] = '';
+    session_start();
 
     // functions.php の読み込み
     include('common/functions.php');
     ini_set("display_errors","Off");
     
     // DB接続
-    //require_once 'inc/inc_path.php';
     require('db/db_connect.php');
     
     // 画面遷移用のflag
@@ -24,8 +21,6 @@ session_start();
     
     // ログインボタン押下時の処理
     if (isset($_POST['login'])) {
-            
-
         
         // 打ち込んだ入力項目↓電話番号(prymary にしてもいいかも)とパスワード
         // tel は数値 int は最大数ではじかれるためつけない
@@ -41,10 +36,6 @@ session_start();
 
         // 入力項目から特定のアカウントを検索 => $result_user 
         include('account/login.php');
-
-//        echo "<pre>";
-//        echo "ユーザーID：" . $result_user['password'];
-//        echo "</pre>";
 
         // result_user が 空でない なら予約確認画面へ
         if (!empty($result_user)) {
@@ -71,7 +62,7 @@ session_start();
     $res_hotel = $_SESSION['res_hotel'];
     $check_in = $_SESSION['check_in'];
     $check_out = $_SESSION['check_out'];
-//    echo "ホテルのres_kbn は" . $_SESSION['res_hotel']['saishin_kbn'];
+    //    echo "ホテルのres_kbn は" . $_SESSION['res_hotel']['saishin_kbn'];
 
 
 
@@ -88,23 +79,7 @@ session_start();
         // ログインセッションを削除してログイン画面へ
         $_SESSION = array();
        setcookie(session_name(),'', time()-1800);
-       session_destroy(); 
-//        unset($_SESSION);
-//        session_destroy();
-// セッションクッキーの削除
-//setcookie( session_name(), '', time()-60);
- 
-// セッションを破棄
-//        $flg = session_destroy();
-// 
-//if( $flg === true ){
-//  echo "セッションを破棄しました！";
-//} else {
-//  echo "セッションの破棄に失敗しました！";
-//    }
-
-        
-        
+       session_destroy();  
 
         $flag = 0;
 
@@ -185,43 +160,8 @@ session_start();
         include('account/res_insert.php');
         
     }
-//
-//    echo "<pre>";
-//    echo "↓セッションの電話番号" . PHP_EOL;
-//    var_dump($_SESSION['user']['tel']);
-//    echo "↓セッションのパスワード" . PHP_EOL;
-//    var_dump($_SESSION['user']['password']);
-//    echo "↓セッションのアカウント名" . PHP_EOL;
-//    var_dump($_SESSION['user']['name']);
-//    echo "<hr>";
-//    echo "</pre>";
-//    
-//    echo "↓セッションのmed予約状況" . PHP_EOL;
-//    var_dump($_SESSION['res_med']);
-//    echo "<hr>";
-//    echo "↓セッションのhotel予約状況" . PHP_EOL;
-//    var_dump($res_hotel);
-//    echo "<pre>"; 
-//   echo "↓セッションのcheck_in" . PHP_EOL;
-//   var_dump($_SESSION['check_in']);
-//   echo "↓セッションのcheck_out" . PHP_EOL;
-//   var_dump($_SESSION['check_out']);
-//   echo "</pre>";
-//    echo "<hr>";
-//        
-//    echo "↓セッションのuser" . PHP_EOL;
-//    var_dump($_SESSION['user']);
-
-
-
 
 ?>
-
-
-
-
-
-
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -230,12 +170,10 @@ session_start();
     <meta charset="UTF-8">
     <title>動物病院</title>
 
-    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.18.1/build/cssreset/cssreset-min.css">
+    <link rel="stylesheet" href="css/reset.css">
     <!-- fontawesome    -->
     <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-<!--     Bootstrap CSS -->
-<!--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">-->
     <!-- googleMaterials -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <!-- googlefonts -->
@@ -260,7 +198,6 @@ session_start();
         <div class="inner">
             <div id="logo">
                 <a href="index.html">
-                    <!--                        <img src="img/logo.png" alt="">-->
                 </a>
             </div>
             <div id="title">
@@ -586,7 +523,7 @@ session_start();
             <li><img src="img/sns/facebook.png" alt="" style="width:40px;height:40px;"></li>
         </ul>
         <div class="copyright">
-            <p><small>Copyright 2021 ヒューリスアニマルクリニック All rights reserved.</small></p>
+            <p><small>&copy;2021 ヒューリスアニマルクリニック All rights reserved.</small></p>
         </div>
     </footer>
     	

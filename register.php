@@ -2,13 +2,10 @@
     ini_set('display_errors',1);
     include('common/notice_remove.php');
 
-    // reservation.php から遷移してきたとき $_POST はない
-
     // functions.php の読み込み
     include('common/functions.php');
 
     // DB接続
-    require_once 'inc/inc_path.php';
     require('db/db_connect.php');
 
     // 画面遷移用のflag
@@ -109,8 +106,6 @@
         //処理実行
        $stmt->execute();
     }
-
-//    var_dump($error_list);
 ?>
 
 <!DOCTYPE html>
@@ -119,7 +114,7 @@
 <head>
     <meta charset="UTF-8">
     <title>動物病院</title>
-    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.18.1/build/cssreset/cssreset-min.css">
+    <link rel="stylesheet" href="css/reset.css">
     <!-- fontawesome    -->
     <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -139,7 +134,6 @@
         <div class="inner">
             <div id="logo">
                 <a href="index.html">
-                    <!--                        <img src="img/logo.png" alt="">-->
                 </a>
             </div>
             <div id="title">
@@ -465,7 +459,7 @@
             <li><img src="img/sns/facebook.png" alt="" style="width:40px;height:40px;"></li>
         </ul>
         <div class="copyright">
-            <p><small>Copyright 2021 ヒューリスアニマルクリニック All rights reserved.</small></p>
+            <p><small>&copy;2021 ヒューリスアニマルクリニック All rights reserved.</small></p>
         </div>
     </footer>
     	
